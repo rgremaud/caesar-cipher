@@ -1,9 +1,4 @@
-# Convert all letters to a numeric value
 
-
-
-
-# prompt the user to enter a string and shift value
 def caeser_cipher(string,shift)
 
   alphabet_downcase = ["a","b","c","d","e","f","g","h","i","j","k","l","m",
@@ -14,43 +9,47 @@ def caeser_cipher(string,shift)
 
   array = string.split("")
 
-  p array
-
+  
   number_array = array.map do |letter|
-    if letter.upcase == letter
+    if alphabet_upcase.index(letter) == nil && alphabet_downcase.index(letter) == nil 
+      letter = letter
+    elsif letter.upcase == letter
       alphabet_upcase.index(letter)
     else
       alphabet_downcase.index(letter)
     end
   end
 
-  p number_array
-
   shift_array = number_array.map do |number|
-    if number + shift >= 0 && number + shift <= 25
+    if number.to_s != number.to_i.to_s
+      number = number
+    elsif number + shift >= 0 && number + shift <= 25
       number = number + shift
     elsif number + shift > 25
-      number = (number + shift) % 25
+      number = (number + shift - 1) % 25
     elsif number + shift < 0
-      number = 25 - number
+      number = 26 - ((number + shift)*-1)
     else
     end
   end
 
-  p shift_array
 
-  # map shift_array to cipher_array
   cipher_array = shift_array.map do |number|
-  # if index array == upcase
-    if array[shift_array.index(number)] == array[shift_array.index(number)].upcase
+    if number.to_s != number.to_i.to_s
+      number = number
+    elsif array[shift_array.index(number)] == array[shift_array.index(number)].upcase
       number = alphabet_upcase[number]
     elsif array[shift_array.index(number)] != array[shift_array.index(number)].upcase
       number = alphabet_downcase[number]
     end
   end
-  p cipher_array
+
+  
+  new_string = cipher_array.join
+  p new_string
 end
 
-caeser_cipher("TEst",3)
+caeser_cipher("What a string!",5)
 
-caeser_cipher("WHvw",22)
+caeser_cipher("Bmfy f xywnsl!",21)
+
