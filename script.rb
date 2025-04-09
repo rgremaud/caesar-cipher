@@ -29,7 +29,8 @@ z = 26
 def caeser_cipher(string,shift)
 # convert string to an array of single letters/spaces
   array = string.spit("")
-# map the string to the corresponding numerical values
+# map the array so each letter string is now an integer
+# This should allow you to reference the value and build an array by that value
 # apply the shift to the numerical values
 # convert back to string
 # return new string
